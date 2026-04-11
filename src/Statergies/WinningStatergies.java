@@ -1,5 +1,7 @@
 package Statergies;
 
+import Models.Move;
+
 public interface WinningStatergies {
-    boolean checkWinner();
+    boolean checkWinner(Move move);
 }

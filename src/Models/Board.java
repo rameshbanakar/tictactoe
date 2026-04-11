@@ -9,6 +9,7 @@ public class Board {
 
     public Board(int size) {
         this.size = size;
+        this.board=new ArrayList<>();
         for(int i=0;i<size;i++){
             this.board.add(new ArrayList<>());
             for(int j=0;j<size;j++){
