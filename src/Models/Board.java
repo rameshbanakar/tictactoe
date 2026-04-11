@@ -1,4 +1,19 @@
 package Models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Board {
+    private List<List<Cell>> board;
+    private int size;
+
+    public Board(int size) {
+        this.size = size;
+        for(int i=0;i<size;i++){
+            this.board.add(new ArrayList<>());
+            for(int j=0;j<size;j++){
+                this.board.get(i).add(new Cell(i,j));
+            }
+        }
+    }
 }
