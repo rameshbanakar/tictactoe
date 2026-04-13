@@ -17,4 +17,17 @@ public class Board {
             }
         }
     }
+
+    public void displayBoard(){
+        for(int i=0;i<this.size;i++){
+            for(int j=0;j<this.size;j++){
+                this.board.get(i).get(j).displayCell();
+            }
+            System.out.println();
+        }
+    }
+
+    public List<List<Cell>> getCell(){
+        return this.board;
+    }
 }
