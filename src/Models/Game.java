@@ -3,6 +3,7 @@ package Models;
 import Models.Player.Player;
 import Models.enums.CellStatus;
 import Models.enums.GameStatus;
+import Statergies.WinningStatergies;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,16 @@ public class Game {
     private GameStatus gameStatus;
     private Player winner;
     private int nextPlayer;
+
+    private List<WinningStatergies> winningStatergies;
+
+    public List<WinningStatergies> getWinningStatergies() {
+        return winningStatergies;
+    }
+
+    public void setWinningStatergies(List<WinningStatergies> winningStatergies) {
+        this.winningStatergies = winningStatergies;
+    }
 
     public Game(int  size) {
         this.board = new Board(size);
@@ -75,7 +86,7 @@ public class Game {
 
     public void makeMove(){
         Player currPlayer=players.get(nextPlayer);
-        Move move=currPlayer.makeMove();
+        Move move = currPlayer.makeMove(board);
 
         int row=move.getCell().getRow();
         int col=move.getCell().getCol();
@@ -86,7 +97,24 @@ public class Game {
 
         moves.add(move);
 
+        nextPlayer = (nextPlayer + 1) % players.size();
 
+        if (checkWinner(move)) {
+            winner = currPlayer;
+            gameStatus = GameStatus.COMPLETED;
+        }
 
+        if (moves.size() == board.getSize() * board.getSize()) {
+            gameStatus = GameStatus.DRAW;
+        }
+    }
+
+    public boolean checkWinner(Move move) {
+        for (WinningStatergies winn : winningStatergies) {
+            if (winn.checkWinner(move)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

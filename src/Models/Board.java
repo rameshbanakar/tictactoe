@@ -18,6 +18,13 @@ public class Board {
         }
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
     public void displayBoard(){
         for(int i=0;i<this.size;i++){
             for(int j=0;j<this.size;j++){

@@ -1,5 +1,7 @@
 package Models.Player;
 
+import Models.Board;
+import Models.Move;
 import Models.Symbol;
 import Models.enums.GameDifficulty;
 import Models.enums.PlayerType;
@@ -17,5 +19,10 @@ public class BotPlayer extends Player{
     public BotPlayer(String id, String name, Symbol symbol,GameDifficulty gameDifficulty) {
         super(id, name, symbol, PlayerType.BOT);
         this.gameDifficulty=gameDifficulty;
+    }
+
+    @Override
+    public Move makeMove(Board board) {
+        return null;
     }
 }

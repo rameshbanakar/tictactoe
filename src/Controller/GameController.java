@@ -1,7 +1,11 @@
 package Controller;
 
 import Models.Game;
+import Models.Player.Player;
 import Models.enums.GameStatus;
+import Statergies.WinningStatergies;
+
+import java.util.List;
 
 public class GameController {
     public Game StartGame(int size){
@@ -15,6 +19,14 @@ public class GameController {
         return game.getGameStatus();
     }
     public void makeMove(Game game){
+        game.makeMove();
+    }
 
+    public void addPlayers(Game game, List<Player> player) {
+        game.setPlayers(player);
+    }
+
+    public void addWinningStatergy(Game game, List<WinningStatergies> wins) {
+        game.setWinningStatergies(wins);
     }
 }

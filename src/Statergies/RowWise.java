@@ -11,6 +11,9 @@ public class RowWise implements WinningStatergies{
 
     public RowWise(int size) {
         rowCount = new HashMap[size];
+        for (int i = 0; i < size; i++) {
+            rowCount[i] = new HashMap<>();
+        }
     }
 
     @Override

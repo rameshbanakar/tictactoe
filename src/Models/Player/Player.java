@@ -1,5 +1,7 @@
 package Models.Player;
 
+import Models.Board;
+import Models.Move;
 import Models.Symbol;
 import Models.enums.PlayerType;
 
@@ -48,4 +50,6 @@ public abstract class Player {
     public void setPlayerType(PlayerType playerType) {
         this.playerType = playerType;
     }
+
+    public abstract Move makeMove(Board board);
 }
