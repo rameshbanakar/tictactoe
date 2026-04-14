@@ -1,8 +1,10 @@
 import Controller.GameController;
 import Models.Game;
+import Models.Player.BotPlayer;
 import Models.Player.HumanPlayer;
 import Models.Player.Player;
 import Models.Symbol;
+import Models.enums.GameDifficulty;
 import Models.enums.GameStatus;
 import Statergies.ColumnWise;
 import Statergies.RowWise;
@@ -20,7 +22,7 @@ public class Main {
         Game game=gameController.StartGame(size);
         List<Player> playars = new ArrayList<>();
         Player player1 = new HumanPlayer("1", "Ramesh", new Symbol("X"), 26);
-        Player player2 = new HumanPlayer("2", "Veeresh", new Symbol("V"), 24);
+        Player player2 = new BotPlayer("2", "Botty", new Symbol("V"), GameDifficulty.EASY);
         playars.add(player1);
         playars.add(player2);
         gameController.addPlayers(game, playars);
@@ -38,11 +40,13 @@ public class Main {
         }
 
         if(gameController.getStatus(game).equals(GameStatus.COMPLETED)){
+            gameController.display(game);
             System.out.println(gameController.getWinner(game).getName() + " is the Winner!");
             System.out.println("Congratulations");
         }else{
+            gameController.display(game);
             System.out.println("Game Drawn");
-            System.out.println("Opps none of you won the game");
+            System.out.println("Opps.. none of you won the game");
         }
     }
 }

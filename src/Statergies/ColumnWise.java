@@ -9,6 +9,7 @@ public class ColumnWise implements WinningStatergies{
     private HashMap<String,Integer> colCount[];
 
     public ColumnWise(int size) {
+        this.size = size;
         colCount = new HashMap[size];
         for (int i = 0; i < size; i++) {
             colCount[i] = new HashMap<>();
