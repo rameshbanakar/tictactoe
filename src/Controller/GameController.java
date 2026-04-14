@@ -29,4 +29,8 @@ public class GameController {
     public void addWinningStatergy(Game game, List<WinningStatergies> wins) {
         game.setWinningStatergies(wins);
     }
+
+    public Player getWinner(Game game) {
+        return game.getWinner();
+    }
 }

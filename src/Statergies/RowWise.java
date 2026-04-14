@@ -10,6 +10,7 @@ public class RowWise implements WinningStatergies{
     private HashMap<String, Integer> rowCount[];
 
     public RowWise(int size) {
+        this.size = size;
         rowCount = new HashMap[size];
         for (int i = 0; i < size; i++) {
             rowCount[i] = new HashMap<>();
@@ -27,8 +28,8 @@ public class RowWise implements WinningStatergies{
             rowMap.put(currSymbol,1);
         }
         else rowMap.put(currSymbol,rowMap.get(currSymbol)+1);
-
-        return size==rowMap.get(currSymbol);
+        if (size == rowMap.get(currSymbol)) return true;
+        return false;
     }
 
 

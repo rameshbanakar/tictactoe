@@ -26,6 +26,7 @@ public class Main {
         gameController.addPlayers(game, playars);
 
         List<WinningStatergies> wins = new ArrayList<>();
+
         wins.add(new RowWise(size));
         wins.add(new ColumnWise(size));
 
@@ -34,13 +35,14 @@ public class Main {
         while(gameController.getStatus(game).equals(GameStatus.IN_PROGRESS)){
             gameController.display(game);
             gameController.makeMove(game);
-
         }
 
         if(gameController.getStatus(game).equals(GameStatus.COMPLETED)){
-            System.out.println("Winner");
+            System.out.println(gameController.getWinner(game).getName() + " is the Winner!");
+            System.out.println("Congratulations");
         }else{
             System.out.println("Game Drawn");
+            System.out.println("Opps none of you won the game");
         }
     }
 }
