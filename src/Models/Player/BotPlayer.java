@@ -11,11 +11,13 @@ import Statergies.BotMovingStats;
 public class BotPlayer extends Player{
     private GameDifficulty gameDifficulty;
     private BotMovingStats botPlayingStats;
+    private int size;
 
-    public BotPlayer(String id, String name, Symbol symbol, GameDifficulty gameDifficulty) {
+    public BotPlayer(String id, String name, Symbol symbol, GameDifficulty gameDifficulty, int size) {
         super(id, name, symbol, PlayerType.BOT);
         this.gameDifficulty = gameDifficulty;
-        this.botPlayingStats = BotStatergyFactory.getBotStatergy(this.gameDifficulty);
+        this.size = size;
+        this.botPlayingStats = BotStatergyFactory.getBotStatergy(this.gameDifficulty, size);
     }
     public GameDifficulty getGameDifficulty() {
         return gameDifficulty;

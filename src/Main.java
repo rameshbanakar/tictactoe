@@ -22,7 +22,7 @@ public class Main {
         Game game=gameController.StartGame(size);
         List<Player> playars = new ArrayList<>();
         Player player1 = new HumanPlayer("1", "Ramesh", new Symbol("X"), 26);
-        Player player2 = new BotPlayer("2", "Botty", new Symbol("V"), GameDifficulty.EASY);
+        Player player2 = new BotPlayer("2", "Botty", new Symbol("V"), GameDifficulty.MEDIUM, size);
         playars.add(player1);
         playars.add(player2);
         gameController.addPlayers(game, playars);
