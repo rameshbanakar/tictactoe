@@ -1,5 +1,6 @@
 package Models;
 
+import Models.Player.BotPlayer;
 import Models.Player.Player;
 import Models.enums.CellStatus;
 import Models.enums.GameStatus;
@@ -15,24 +16,24 @@ public class Game {
     private GameStatus gameStatus;
     private Player winner;
     private int nextPlayer;
-
     private List<WinningStatergies> winningStatergies;
 
-    public List<WinningStatergies> getWinningStatergies() {
-        return winningStatergies;
-    }
-
-    public void setWinningStatergies(List<WinningStatergies> winningStatergies) {
-        this.winningStatergies = winningStatergies;
-    }
-
-    public Game(int  size) {
+    public Game(int size, List<Player> players, List<WinningStatergies> winn) {
         this.board = new Board(size);
-        this.players = new ArrayList<>();
+        this.players = players;
         this.moves = new ArrayList<>();
         this.gameStatus = GameStatus.IN_PROGRESS;
         this.winner = null;
         this.nextPlayer = 0;
+        this.winningStatergies = winn;
+    }
+
+    public static Builder getBuilder() {
+        return new Builder();
+    }
+
+    public List<WinningStatergies> getWinningStatergies() {
+        return winningStatergies;
     }
 
 
@@ -116,5 +117,69 @@ public class Game {
             }
         }
         return false;
+    }
+
+    public void setWinningStatergies(List<WinningStatergies> winningStatergies) {
+        this.winningStatergies = winningStatergies;
+    }
+
+    public static class Builder {
+        private int size;
+        private List<Player> players;
+        private List<WinningStatergies> winn;
+
+        public Builder setSize(int size) {
+            this.size = size;
+            return this;
+        }
+
+        public Builder setPlayers(List<Player> players) {
+            this.players = players;
+            return this;
+        }
+
+        public Builder setWinningStats(List<WinningStatergies> winn) {
+            this.winn = winn;
+            return this;
+        }
+
+        private boolean numberOfPlayersAndSizeOfBoard() {
+            return this.size > players.size();
+        }
+
+        private boolean botPlayersValidation() {
+            int count = 0;
+            for (Player player : this.players) {
+                if (player instanceof BotPlayer) {
+                    count++;
+                }
+            }
+            return count >= 2;
+        }
+
+        private boolean validate() {
+            if (!numberOfPlayersAndSizeOfBoard()) {
+                System.out.println("Number of Players should be less the board size");
+                return false;
+            } else if (players.size() == 1) {
+                System.out.println("Single player cann't play the game");
+                return false;
+            } else if (botPlayersValidation()) {
+                System.out.println("Single bot can be allowed in game");
+                return false;
+            } else {
+                return true;
+            }
+
+        }
+
+        public Game buid() {
+
+            if (validate()) {
+                return new Game(this.size, this.players, this.winn);
+            }
+            return null;
+        }
+
     }
 }

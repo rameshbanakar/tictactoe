@@ -8,8 +8,9 @@ import Statergies.WinningStatergies;
 import java.util.List;
 
 public class GameController {
-    public Game StartGame(int size){
-        return new Game(size);
+    public Game StartGame(int size, List<Player> players, List<WinningStatergies> winn) {
+        Game game = Game.getBuilder().setSize(size).setPlayers(players).setWinningStats(winn).buid();
+        return game;
     }
 
     public void display(Game game){

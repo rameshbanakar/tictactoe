@@ -1,7 +1,6 @@
 import Controller.GameController;
 import Models.Game;
 import Models.Player.BotPlayer;
-import Models.Player.HumanPlayer;
 import Models.Player.Player;
 import Models.Symbol;
 import Models.enums.GameDifficulty;
@@ -19,21 +18,17 @@ public class Main {
         Scanner scan=new Scanner(System.in);
         int size=scan.nextInt();
         GameController gameController=new GameController();
-        Game game=gameController.StartGame(size);
         List<Player> playars = new ArrayList<>();
-        Player player1 = new HumanPlayer("1", "Ramesh", new Symbol("X"), 26);
+        Player player1 = new BotPlayer("1", "Ramesh", new Symbol("X"), GameDifficulty.MEDIUM, size);
         Player player2 = new BotPlayer("2", "Botty", new Symbol("V"), GameDifficulty.MEDIUM, size);
         playars.add(player1);
         playars.add(player2);
-        gameController.addPlayers(game, playars);
-
         List<WinningStatergies> wins = new ArrayList<>();
-
         wins.add(new RowWise(size));
         wins.add(new ColumnWise(size));
 
-        gameController.addWinningStatergy(game, wins);
-
+        Game game = gameController.StartGame(size, playars, wins);
+        if (game == null) return;
         while(gameController.getStatus(game).equals(GameStatus.IN_PROGRESS)){
             gameController.display(game);
             gameController.makeMove(game);
